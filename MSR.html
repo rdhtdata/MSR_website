@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="MSR Engineering Works: Precision manufacturing partner in Bengaluru. Tier-1 press tools, sheet metal fabrication, SPM, and EV chassis components. ISO 9001:2015.">
+    <title>MSR Engineering Works | 2026 Industrial Excellence</title>
+
+    <!-- Design Tokens & Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Scripts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'msr-accent': '#f47d31',
+                        'msr-accent-dark': '#c85e1b',
+                        'dark-bg': '#050a0f',
+                        'dark-panel': '#0b1219',
+                        'light-bg': '#f8fafc',
+                        'light-panel': '#ffffff',
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        display: ['Sora', 'sans-serif'],
+                    },
+                    borderRadius: { 'xl-plus': '2rem' }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root { --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1); }
+
+        body {
+            @apply transition-colors duration-500 font-sans;
+        }
+
+        .glass-header {
+            @apply fixed w-full z-50 transition-all duration-300 border-b;
+            backdrop-filter: blur(20px);
+        }
+
+        .dark .glass-header { background: rgba(5, 10, 15, 0.7); border-color: rgba(255,255,255,0.05); }
+        .light .glass-header { background: rgba(248, 250, 252, 0.8); border-color: rgba(0,0,0,0.05); }
+
+        .hero-gradient {
+            background: radial-gradient(circle at 0% 0%, rgba(244, 125, 49, 0.1) 0%, transparent 40%);
+        }
+
+        .stat-card, .service-card {
+            @apply p-6 rounded-2xl border transition-all duration-300;
+            @apply dark:bg-white/5 dark:border-white/5 light:bg-black/5 light:border-black/5;
+        }
+        .stat-card:hover, .service-card:hover { @apply -translate-y-1 border-msr-accent/40 shadow-xl shadow-msr-accent/5; }
+
+        .nav-link { @apply relative font-semibold text-sm tracking-wide; }
+        .nav-link::after {
+            content: ''; @apply absolute w-0 h-0.5 bottom-[-4px] left-0 bg-msr-accent transition-all duration-300;
+        }
+        .nav-link:hover::after { @apply w-full; }
+
+        .reveal-up { opacity: 0; transform: translateY(40px); }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { @apply dark:bg-dark-bg light:bg-light-bg; }
+        ::-webkit-scrollbar-thumb { @apply bg-msr-accent rounded-full; }
+
+        .theme-toggle-btn {
+            @apply p-2 rounded-full border transition-all active:scale-95;
+            @apply dark:border-white/10 dark:bg-white/5 light:border-black/10 light:bg-black/5;
+        }
+
+        .timeline-dot {
+            @apply absolute w-4 h-4 bg-msr-accent rounded-full -left-[9px] top-1 border-4 border-dark-bg light:border-light-bg;
+        }
+    </style>
+</head>
+<body class="dark:bg-dark-bg light:bg-light-bg dark:text-slate-200 light:text-slate-800">
+
+    <!-- Navigation -->
+    <header class="glass-header h-20 flex items-center">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full flex items-center justify-between relative">
+            <a href="#" class="flex items-center gap-3 group z-50">
+                <div class="w-10 h-10 bg-msr-accent rounded-xl flex items-center justify-center font-display font-extrabold text-white group-hover:rotate-6 transition-transform">M</div>
+                <div class="hidden sm:block">
+                    <span class="block font-display font-bold tracking-tight">MSR ENGINEERING</span>
+                    <span class="block text-[9px] uppercase tracking-widest text-msr-accent font-black">Est. 1991</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav id="main-nav" class="hidden md:flex items-center gap-6 lg:gap-8 z-40">
+                <a href="#about" class="nav-link">ABOUT</a>
+                <a href="#services" class="nav-link">SERVICES</a>
+                <a href="#matrix" class="nav-link">PLANT</a>
+                <a href="#customers" class="nav-link">INDUSTRIES</a>
+                <a href="#quality" class="nav-link">QUALITY</a>
+            </nav>
+
+            <div class="flex items-center gap-4 z-50">
+                <button onclick="toggleTheme()" class="theme-toggle-btn" aria-label="Toggle Theme">
+                    <i data-lucide="sun" class="w-5 h-5 hidden dark:block text-slate-200"></i>
+                    <i data-lucide="moon" class="w-5 h-5 block dark:hidden text-slate-800"></i>
+                </button>
+                <a href="#enquiry" class="hidden sm:flex bg-msr-accent hover:bg-msr-accent-dark text-white px-6 py-2.5 rounded-full text-sm font-bold transition-all shadow-lg shadow-msr-accent/20">
+                    RFQ PORTAL
+                </a>
+                <button id="mobile-menu-btn" class="md:hidden p-2 dark:text-slate-200 light:text-slate-800 focus:outline-none">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="relative pt-44 pb-32 hero-gradient">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 grid lg:grid-cols-2 gap-16 items-center">
+            <div class="reveal-up">
+                <div class="inline-flex items-center gap-2 px-3 py-1 bg-msr-accent/10 border border-msr-accent/20 rounded-full text-msr-accent text-[10px] font-black uppercase tracking-widest mb-6">
+                    Tier-1 Supply Chain Excellence
+                </div>
+                <h1 class="font-display text-5xl lg:text-7xl font-extrabold leading-[1.1] mb-8 text-balance">
+                    Precision is <br><span class="text-msr-accent">Our Profession.</span>
+                </h1>
+                <p class="text-lg opacity-70 leading-relaxed mb-10 max-w-lg">
+                    Three decades of engineering discipline. We deliver high-quality, reliable manufacturing solutions tailored to your needs—from press tools and EV chassis to large-scale SPM and agro-machinery components.
+                </p>
+                <div class="flex flex-wrap gap-4 mb-12">
+                    <a href="#enquiry" class="px-8 py-4 bg-msr-accent text-white rounded-full font-bold hover:scale-105 transition-all">Submit Technical RFQ</a>
+                    <div class="flex items-center gap-3 px-6 py-4 rounded-full border border-msr-accent/20 bg-msr-accent/5">
+                        <i data-lucide="award" class="text-msr-accent"></i>
+                        <span class="text-sm font-bold uppercase tracking-tighter">ISO 9001:2015</span>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                    <div class="stat-card">
+                        <span class="block text-2xl font-black text-msr-accent">22k</span>
+                        <span class="text-[10px] uppercase font-bold opacity-50">Sq Ft Plant</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="block text-2xl font-black text-msr-accent">200T</span>
+                        <span class="text-[10px] uppercase font-bold opacity-50">Press Cap.</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="block text-2xl font-black text-msr-accent">25+</span>
+                        <span class="text-[10px] uppercase font-bold opacity-50">Machines</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="block text-2xl font-black text-msr-accent">35y</span>
+                        <span class="text-[10px] uppercase font-bold opacity-50">Expertise</span>
+                    </div>
+                </div>
+            </div>
+            <div class="reveal-up" style="transition-delay: 200ms;">
+                <div class="relative rounded-xl-plus overflow-hidden border dark:border-white/10 light:border-black/10 shadow-2xl">
+                    <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80&w=2070&auto=format&fit=crop" class="w-full aspect-[4/5] object-cover opacity-80" alt="Precision Shop Floor">
+                    <div class="absolute inset-0 bg-gradient-to-t dark:from-dark-bg light:from-light-bg via-transparent opacity-60"></div>
+                    <div class="absolute bottom-8 left-8 right-8 p-6 bg-msr-accent/10 backdrop-blur-xl rounded-2xl border border-white/20">
+                        <p class="text-[10px] font-black uppercase tracking-widest text-msr-accent mb-2">Technical Spotlight</p>
+                        <h3 class="text-xl font-display font-bold">Comprehensive Fabrication</h3>
+                        <p class="text-sm opacity-70 mt-1">High-volume blanking, laser cutting, and complex assembly with micron-level consistency.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Logo Strip -->
+    <div class="py-12 border-y dark:border-white/5 light:border-black/5 bg-msr-accent/5">
+        <div class="max-w-7xl mx-auto px-6 overflow-hidden">
+            <p class="text-center text-[9px] uppercase font-black tracking-[0.4em] opacity-40 mb-8">Strategically Trusted By</p>
+            <div class="flex flex-wrap justify-center gap-x-12 gap-y-6 grayscale opacity-50 hover:opacity-100 transition-opacity">
+                <span class="font-display font-black text-xl tracking-tighter">TVS MOTORS</span>
+                <span class="font-display font-black text-xl tracking-tighter">FOWLER WESTRUP</span>
+                <span class="font-display font-black text-xl tracking-tighter">MECWIN TECH</span>
+                <span class="font-display font-black text-xl tracking-tighter">VIRYA MOBILITY</span>
+                <span class="font-display font-black text-xl tracking-tighter">ADITYA AUTO</span>
+                <span class="font-display font-black text-xl tracking-tighter hidden md:block">NASH INDUSTRIES</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- NEW: Comprehensive Services & Scope of Work -->
+    <section id="services" class="py-32 dark:bg-dark-panel light:bg-light-panel">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="text-center mb-16 reveal-up">
+                <div class="inline-flex items-center gap-2 px-3 py-1 bg-msr-accent/10 border border-msr-accent/20 rounded-full text-msr-accent text-[10px] font-black uppercase tracking-widest mb-4">
+                    Our Scope of Work
+                </div>
+                <h2 class="text-4xl lg:text-6xl font-display font-black mb-6">Capabilities <span class="text-msr-accent">Without Compromise</span>.</h2>
+                <p class="opacity-60 max-w-2xl mx-auto text-lg">We design, develop, and manufacture a wide array of specialized engineering components tailored to your exact industry requirements.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 reveal-up">
+                <!-- Service 1 -->
+                <div class="service-card group">
+                    <div class="w-12 h-12 bg-msr-accent/10 rounded-xl flex items-center justify-center text-msr-accent mb-6 group-hover:bg-msr-accent group-hover:text-white transition-all">
+                        <i data-lucide="pen-tool"></i>
+                    </div>
+                    <h3 class="text-xl font-display font-bold mb-3">Precision Press Tools</h3>
+                    <p class="text-sm opacity-70 leading-relaxed mb-4">Custom-designed and machined press tools engineered to meet high-volume production needs with unwavering precision and operational efficiency.</p>
+                </div>
+                <!-- Service 2 -->
+                <div class="service-card group">
+                    <div class="w-12 h-12 bg-msr-accent/10 rounded-xl flex items-center justify-center text-msr-accent mb-6 group-hover:bg-msr-accent group-hover:text-white transition-all">
+                        <i data-lucide="layers"></i>
+                    </div>
+                    <h3 class="text-xl font-display font-bold mb-3">Press Components</h3>
+                    <p class="text-sm opacity-70 leading-relaxed mb-4">High-fidelity production of components manufactured from a diverse range of materials including Mild Steel, Stainless Steel, and Brass to exacting standards.</p>
+                </div>
+                <!-- Service 3 -->
+                <div class="service-card group">
+                    <div class="w-12 h-12 bg-msr-accent/10 rounded-xl flex items-center justify-center text-msr-accent mb-6 group-hover:bg-msr-accent group-hover:text-white transition-all">
+                        <i data-lucide="scissors"></i>
+                    </div>
+                    <h3 class="text-xl font-display font-bold mb-3">Sheet Metal Fabrication</h3>
+                    <p class="text-sm opacity-70 leading-relaxed mb-4">Comprehensive fabrication services encompassing 3kW Fiber Laser cutting, CNC bending, hydraulic shearing, and complex assembly with premium surface finishes.</p>
+                </div>
+                <!-- Service 4 -->
+                <div class="service-card group">
+                    <div class="w-12 h-12 bg-msr-accent/10 rounded-xl flex items-center justify-center text-msr-accent mb-6 group-hover:bg-msr-accent group-hover:text-white transition-all">
+                        <i data-lucide="zap"></i>
+                    </div>
+                    <h3 class="text-xl font-display font-bold mb-3">EV Chassis Manufacturing</h3>
+                    <p class="text-sm opacity-70 leading-relaxed mb-4">Structural backbone manufacturing. We produce robust, lightweight chassis for electric buggies of various seating capacities for industry-leading mobility clients.</p>
+                </div>
+                <!-- Service 5 -->
+                <div class="service-card group">
+                    <div class="w-12 h-12 bg-msr-accent/10 rounded-xl flex items-center justify-center text-msr-accent mb-6 group-hover:bg-msr-accent group-hover:text-white transition-all">
+                        <i data-lucide="tractor"></i>
+                    </div>
+                    <h3 class="text-xl font-display font-bold mb-3">Agro & Silo Infrastructure</h3>
+                    <p class="text-sm opacity-70 leading-relaxed mb-4">Production and assembly of heavy-duty agricultural equipment, commercial conveyor systems, grain chutes, and robust infrastructure items for large-scale SILOs.</p>
+                </div>
+                <!-- Service 6 -->
+                <div class="service-card group">
+                    <div class="w-12 h-12 bg-msr-accent/10 rounded-xl flex items-center justify-center text-msr-accent mb-6 group-hover:bg-msr-accent group-hover:text-white transition-all">
+                        <i data-lucide="settings"></i>
+                    </div>
+                    <h3 class="text-xl font-display font-bold mb-3">Special Purpose Machinery</h3>
+                    <p class="text-sm opacity-70 leading-relaxed mb-4">Bespoke SPM design and build services, alongside dedicated labor support for specialized and highly intricate mechanical assemblies.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section & Evolution -->
+    <section id="about" class="py-32">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 grid lg:grid-cols-2 gap-20 items-center">
+            <div class="reveal-up space-y-8">
+                <div>
+                    <h2 class="text-4xl lg:text-5xl font-display font-black mb-6">Evolution of <br><span class="text-msr-accent">Leadership.</span></h2>
+                    <p class="text-lg opacity-70 leading-relaxed">Founded in 1991 by Mr. T.M. Sundarrajan with a passion for precision, MSR has grown from a humble tool-room operation into a trusted industry leader. Today, Mr. Sai Mahesh M S (Mechanical Engineer & Leeds MBA) combines modern strategies with traditional values to drive innovation and employee welfare.</p>
+                </div>
+                <div class="grid sm:grid-cols-2 gap-6">
+                    <div class="p-6 rounded-2xl dark:bg-dark-panel light:bg-light-panel border dark:border-white/5 light:border-black/5">
+                        <div class="flex items-center gap-3 mb-4 text-msr-accent">
+                            <i data-lucide="users" class="w-5 h-5"></i>
+                            <span class="font-black text-xs uppercase tracking-widest">Our Team</span>
+                        </div>
+                        <p class="text-sm opacity-70">A skilled team of 25+ professionals, each with an average of 12 years of shop-floor experience, continuously delivering high-quality products.</p>
+                    </div>
+                    <div class="p-6 rounded-2xl dark:bg-dark-panel light:bg-light-panel border dark:border-white/5 light:border-black/5">
+                        <div class="flex items-center gap-3 mb-4 text-msr-accent">
+                            <i data-lucide="target" class="w-5 h-5"></i>
+                            <span class="font-black text-xs uppercase tracking-widest">Vision 2030</span>
+                        </div>
+                        <p class="text-sm opacity-70">To establish 2 more technologically advanced manufacturing units by 2030, driving sustainable growth through engineering excellence.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="reveal-up relative">
+                <div class="aspect-square rounded-3xl overflow-hidden grayscale hover:grayscale-0 transition-all border dark:border-white/10 light:border-black/10 relative z-10">
+                    <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover" alt="Engineering Team">
+                </div>
+                <!-- Decorative background elements -->
+                <div class="absolute -top-10 -right-10 w-64 h-64 bg-msr-accent/20 rounded-full blur-3xl z-0"></div>
+                <div class="absolute -bottom-10 -left-10 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl z-0"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW: Milestones Timeline -->
+    <section class="py-24 border-t dark:border-white/5 light:border-black/5 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="text-center mb-16 reveal-up">
+                <h2 class="text-4xl font-display font-black mb-4">Our <span class="text-msr-accent">Journey</span>.</h2>
+                <p class="opacity-60 max-w-xl mx-auto">From a single hydraulic press to a sprawling 22,000 sq. ft. precision facility.</p>
+            </div>
+
+            <div class="max-w-3xl mx-auto relative border-l-2 border-dark-panel light:border-light-panel ml-4 md:ml-auto reveal-up">
+
+                <div class="mb-10 pl-8 relative">
+                    <div class="timeline-dot"></div>
+                    <span class="text-msr-accent font-black text-sm uppercase tracking-widest block mb-1">1991 - 1996</span>
+                    <h4 class="text-xl font-bold mb-2">The Foundation</h4>
+                    <p class="opacity-70 text-sm">Initial MSME setup established with one hydraulic press and lathe machine, building a core foundation in precision manufacturing.</p>
+                </div>
+
+                <div class="mb-10 pl-8 relative">
+                    <div class="timeline-dot"></div>
+                    <span class="text-msr-accent font-black text-sm uppercase tracking-widest block mb-1">1997 - 2002</span>
+                    <h4 class="text-xl font-bold mb-2">Capacity Scaling</h4>
+                    <p class="opacity-70 text-sm">Installed high-tonnage press machines and established a dedicated tool room to take on larger, more complex projects.</p>
+                </div>
+
+                <div class="mb-10 pl-8 relative">
+                    <div class="timeline-dot"></div>
+                    <span class="text-msr-accent font-black text-sm uppercase tracking-widest block mb-1">2003 - 2010</span>
+                    <h4 class="text-xl font-bold mb-2">Infrastructure Expansion & Diversification</h4>
+                    <p class="opacity-70 text-sm">Purchased 22,000 sqft of industrial land. Diversified heavily into Special Purpose Machinery (SPM) and agro-machinery production.</p>
+                </div>
+
+                <div class="mb-10 pl-8 relative">
+                    <div class="timeline-dot"></div>
+                    <span class="text-msr-accent font-black text-sm uppercase tracking-widest block mb-1">2011 - 2022</span>
+                    <h4 class="text-xl font-bold mb-2">ISO Certification & Fabrication Upgrades</h4>
+                    <p class="opacity-70 text-sm">Achieved ISO 9001:2015 certification. Added heavy machinery such as Shearing and CNC Bending machines to drastically expand our manufacturing scope.</p>
+                </div>
+
+                <div class="pl-8 relative">
+                    <div class="timeline-dot !bg-white"></div>
+                    <span class="text-white font-black text-sm uppercase tracking-widest block mb-1">2024 - Present</span>
+                    <h4 class="text-xl font-bold mb-2">Assembly Area Expansion</h4>
+                    <p class="opacity-70 text-sm">Currently expanding operational workspace from 6,000 sqft to 9,000 sqft, with a major focus on establishing a state-of-the-art dedicated assembly area.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Machinery Matrix (From PDF) -->
+    <section id="matrix" class="py-32 dark:bg-dark-panel light:bg-light-panel border-y dark:border-white/5 light:border-black/5">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="text-center mb-16 reveal-up">
+                <h2 class="text-4xl lg:text-6xl font-display font-black mb-6">Plant & <span class="text-msr-accent">Capability</span>.</h2>
+                <p class="opacity-60 max-w-2xl mx-auto text-lg">Our expanding infrastructure features over 25 advanced machines, enabling us to manage high-volume and complex manufacturing processes efficiently.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8 reveal-up">
+                <!-- Press Shop -->
+                <div class="p-8 rounded-3xl dark:bg-dark-bg light:bg-light-bg border dark:border-white/5 light:border-black/5 shadow-xl">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-12 h-12 bg-msr-accent/20 rounded-xl flex items-center justify-center text-msr-accent"><i data-lucide="factory"></i></div>
+                        <h3 class="text-2xl font-display font-bold">Press & Forming Shop</h3>
+                    </div>
+                    <ul class="space-y-4">
+                        <li class="flex justify-between items-center py-2 border-b dark:border-white/5 light:border-black/5">
+                            <span class="opacity-80 text-sm font-medium">Power Presses</span>
+                            <span class="font-bold text-msr-accent bg-msr-accent/10 px-3 py-1 rounded">10 to 200 Ton</span>
+                        </li>
+                        <li class="flex justify-between items-center py-2 border-b dark:border-white/5 light:border-black/5">
+                            <span class="opacity-80 text-sm font-medium">Fly Presses</span>
+                            <span class="font-bold text-msr-accent bg-msr-accent/10 px-3 py-1 rounded">1 to 10 Ton</span>
+                        </li>
+                        <li class="flex justify-between items-center py-2 border-b dark:border-white/5 light:border-black/5">
+                            <span class="opacity-80 text-sm font-medium">CNC Bending Machine</span>
+                            <span class="font-bold text-msr-accent bg-msr-accent/10 px-3 py-1 rounded">4.3m / 200T</span>
+                        </li>
+                        <li class="flex justify-between items-center py-2">
+                            <span class="opacity-80 text-sm font-medium">Hydraulic Shearing</span>
+                            <span class="font-bold text-msr-accent bg-msr-accent/10 px-3 py-1 rounded">Up to 3m / 6mm</span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Tool Room & Cutting -->
+                <div class="p-8 rounded-3xl dark:bg-dark-bg light:bg-light-bg border dark:border-white/5 light:border-black/5 shadow-xl">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-12 h-12 bg-msr-accent/20 rounded-xl flex items-center justify-center text-msr-accent"><i data-lucide="cpu"></i></div>
+                        <h3 class="text-2xl font-display font-bold">CNC, Tooling & Fab</h3>
+                    </div>
+                    <ul class="space-y-4">
+                        <li class="flex justify-between items-center py-2 border-b dark:border-white/5 light:border-black/5">
+                            <span class="opacity-80 text-sm font-medium">Fiber Laser Cutting</span>
+                            <span class="font-bold text-msr-accent bg-msr-accent/10 px-3 py-1 rounded">3kW (4m x 2m)</span>
+                        </li>
+                        <li class="flex justify-between items-center py-2 border-b dark:border-white/5 light:border-black/5">
+                            <span class="opacity-80 text-sm font-medium">Milling Machine</span>
+                            <span class="font-bold text-msr-accent bg-msr-accent/10 px-3 py-1 rounded">Equipped with DRO</span>
+                        </li>
+                        <li class="flex justify-between items-center py-2 border-b dark:border-white/5 light:border-black/5">
+                            <span class="opacity-80 text-sm font-medium">Welding Stations</span>
+                            <span class="font-bold text-msr-accent bg-msr-accent/10 px-3 py-1 rounded">Spot (15KVA), TIG, CO2</span>
+                        </li>
+                        <li class="flex justify-between items-center py-2">
+                            <span class="opacity-80 text-sm font-medium">Pipe Cutting & Rolling</span>
+                            <span class="font-bold text-msr-accent bg-msr-accent/10 px-3 py-1 rounded">Fully Automatic</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW: Expanded Industries & Customers -->
+    <section id="customers" class="py-32">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="text-center mb-16 reveal-up">
+                <h2 class="text-4xl lg:text-5xl font-display font-black mb-6">Empowering <span class="text-msr-accent">Industry Leaders</span>.</h2>
+                <p class="opacity-60 max-w-3xl mx-auto text-lg">We take immense pride in our partnerships, consistently delivering specialized excellence and reliability to a diverse spectrum of valued customers.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 reveal-up">
+                <!-- TVS -->
+                <div class="p-6 rounded-2xl border dark:border-white/10 light:border-black/10 dark:bg-dark-panel light:bg-light-panel">
+                    <h4 class="font-display font-bold text-xl mb-2">TVS Motor Company</h4>
+                    <p class="text-xs text-msr-accent font-bold uppercase tracking-widest mb-4">via Supangita Engineers</p>
+                    <p class="text-sm opacity-70">Supplying high-precision automotive press components tailored for demanding vehicular production lines.</p>
+                </div>
+                <!-- Fowler -->
+                <div class="p-6 rounded-2xl border dark:border-white/10 light:border-black/10 dark:bg-dark-panel light:bg-light-panel">
+                    <h4 class="font-display font-bold text-xl mb-2">Fowler Westrup India</h4>
+                    <p class="text-xs text-msr-accent font-bold uppercase tracking-widest mb-4">Agro & Silo Infrastructure</p>
+                    <p class="text-sm opacity-70">Manufacturing specialized components for heavy agricultural machinery, massive conveyor systems, and SILO infrastructure.</p>
+                </div>
+                <!-- Mecwin / Virya -->
+                <div class="p-6 rounded-2xl border dark:border-white/10 light:border-black/10 dark:bg-dark-panel light:bg-light-panel">
+                    <h4 class="font-display font-bold text-xl mb-2">Mecwin / Virya Mobility</h4>
+                    <p class="text-xs text-msr-accent font-bold uppercase tracking-widest mb-4">Electric Vehicle Tech</p>
+                    <p class="text-sm opacity-70">Providing critical infrastructure components for electric vehicles, specialized EV motors, and sustainable solar pumps.</p>
+                </div>
+                <!-- Palis -->
+                <div class="p-6 rounded-2xl border dark:border-white/10 light:border-black/10 dark:bg-dark-panel light:bg-light-panel">
+                    <h4 class="font-display font-bold text-xl mb-2">Palis Eco Vehicles</h4>
+                    <p class="text-xs text-msr-accent font-bold uppercase tracking-widest mb-4">Automotive Chassis</p>
+                    <p class="text-sm opacity-70">End-to-end manufacturing of robust structural EV Buggy Chassis designed for optimal weight and safety.</p>
+                </div>
+                <!-- Orizin -->
+                <div class="p-6 rounded-2xl border dark:border-white/10 light:border-black/10 dark:bg-dark-panel light:bg-light-panel">
+                    <h4 class="font-display font-bold text-xl mb-2">Orizin Technologies</h4>
+                    <p class="text-xs text-msr-accent font-bold uppercase tracking-widest mb-4">Consumer / Retail Products</p>
+                    <p class="text-sm opacity-70">Precision retail product manufacturing, including specialized baby bed safety rail guards and secure pet gates.</p>
+                </div>
+                <!-- General Industry -->
+                <div class="p-6 rounded-2xl border dark:border-white/10 light:border-black/10 dark:bg-dark-panel light:bg-light-panel">
+                    <h4 class="font-display font-bold text-xl mb-2">Aditya, Nash & Shobha</h4>
+                    <p class="text-xs text-msr-accent font-bold uppercase tracking-widest mb-4">Tier-1 Industrial Solutions</p>
+                    <p class="text-sm opacity-70">Extensive fabrication and assembly support for Aditya Auto Products, Nash Industries, Shobha Globs, and Welfabs India.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quality Section (PDF Data) -->
+    <section id="quality" class="py-32 bg-msr-accent/5 border-y dark:border-white/5 light:border-black/5">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 grid lg:grid-cols-2 gap-20 items-center">
+            <div class="reveal-up">
+                <h2 class="text-4xl lg:text-5xl font-display font-black mb-8 leading-tight">Zero-Defect <br><span class="text-msr-accent">Traceability.</span></h2>
+                <p class="text-lg opacity-70 mb-10 leading-relaxed">Our facility includes clearly designated zones for inspection. We ensure every component adheres to global standards using calibrated metrology rigs.</p>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="flex items-center gap-3 p-3 rounded-lg border dark:border-white/5 light:border-black/5 bg-dark-bg light:bg-light-bg">
+                        <i data-lucide="check-square" class="text-msr-accent w-5 h-5"></i>
+                        <span class="text-xs font-bold uppercase tracking-widest opacity-80">Digital Verniers (0-300mm)</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-3 rounded-lg border dark:border-white/5 light:border-black/5 bg-dark-bg light:bg-light-bg">
+                        <i data-lucide="check-square" class="text-msr-accent w-5 h-5"></i>
+                        <span class="text-xs font-bold uppercase tracking-widest opacity-80">Micrometers (0-50mm)</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-3 rounded-lg border dark:border-white/5 light:border-black/5 bg-dark-bg light:bg-light-bg">
+                        <i data-lucide="check-square" class="text-msr-accent w-5 h-5"></i>
+                        <span class="text-xs font-bold uppercase tracking-widest opacity-80">Plating Thickness Gauge</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-3 rounded-lg border dark:border-white/5 light:border-black/5 bg-dark-bg light:bg-light-bg">
+                        <i data-lucide="check-square" class="text-msr-accent w-5 h-5"></i>
+                        <span class="text-xs font-bold uppercase tracking-widest opacity-80">Surface Plate & Microscope</span>
+                    </div>
+                </div>
+            </div>
+            <div class="relative reveal-up">
+                <div class="aspect-square rounded-3xl overflow-hidden border dark:border-white/10 light:border-black/10 shadow-2xl">
+                    <img src="https://images.unsplash.com/photo-1581093458791-9f3c3250bb8b?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover grayscale" alt="Metrology Lab">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sustainability (Church Street Project from PDF) -->
+    <section id="sustainability" class="py-32">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col items-center text-center reveal-up">
+            <div class="w-20 h-20 rounded-3xl bg-msr-accent/20 flex items-center justify-center text-msr-accent mb-8 shadow-xl">
+                <i data-lucide="leaf" class="w-10 h-10"></i>
+            </div>
+            <h2 class="text-4xl lg:text-5xl font-display font-black mb-6">Social Engineering.</h2>
+            <p class="max-w-3xl text-lg opacity-70 mb-12 leading-relaxed">As part of our commitment to give back to society, we collaborated with an NGO in 2018 to conceptualize, design, and deliver International Standard Cycle Parking Infrastructure installed at Church Street, inaugurated by the Hon. Former CM of Karnataka to motivate greener modes of transportation.</p>
+            <div class="w-full max-w-4xl rounded-3xl overflow-hidden border dark:border-white/10 light:border-black/10 aspect-video relative">
+                <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb773b09?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover" alt="Sustainable City">
+                <div class="absolute bottom-6 left-6 right-6 bg-dark-panel/90 backdrop-blur text-white p-6 rounded-2xl border border-white/10 text-left">
+                    <h4 class="font-bold text-msr-accent mb-2">Church Street Initiative</h4>
+                    <p class="text-sm opacity-80">A testament to our ability to execute complex public infrastructure designs that promote environmental sustainability.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RFQ Portal -->
+    <section id="enquiry" class="py-32 dark:bg-dark-panel light:bg-light-panel border-t dark:border-white/5 light:border-black/5">
+        <div class="max-w-4xl mx-auto px-6 lg:px-12 text-center reveal-up">
+            <h2 class="text-4xl lg:text-6xl font-display font-black mb-8 leading-tight">Start Your <br><span class="text-msr-accent">Project.</span></h2>
+            <p class="opacity-60 text-lg mb-16">Submit your technical specifications or general inquiries. Our engineering leadership will respond promptly.</p>
+
+            <form id="rfqForm" class="grid md:grid-cols-2 gap-6 text-left">
+                <div class="space-y-6">
+                    <input type="text" id="name" placeholder="Full Name" required class="w-full p-4 rounded-xl dark:bg-dark-bg light:bg-light-bg border dark:border-white/10 light:border-black/10 focus:border-msr-accent outline-none transition-all">
+                    <input type="text" id="company" placeholder="Company Name" class="w-full p-4 rounded-xl dark:bg-dark-bg light:bg-light-bg border dark:border-white/10 light:border-black/10 focus:border-msr-accent outline-none transition-all">
+                </div>
+                <div class="space-y-6">
+                    <select id="service" class="w-full p-4 rounded-xl dark:bg-dark-bg light:bg-light-bg border dark:border-white/10 light:border-black/10 focus:border-msr-accent outline-none transition-all appearance-none cursor-pointer">
+                        <option>Press Tool Design</option>
+                        <option>Press Components</option>
+                        <option>Sheet Metal Fabrication</option>
+                        <option>EV Chassis Manufacturing</option>
+                        <option>Agro-Machinery & SPM</option>
+                        <option>General Enquiry</option>
+                    </select>
+                    <input type="tel" id="phone" placeholder="Phone Number" class="w-full p-4 rounded-xl dark:bg-dark-bg light:bg-light-bg border dark:border-white/10 light:border-black/10 focus:border-msr-accent outline-none transition-all">
+                </div>
+                <textarea id="message" rows="4" placeholder="Technical Requirements (Tolerance, Tonnage, Material)..." class="md:col-span-2 w-full p-4 rounded-xl dark:bg-dark-bg light:bg-light-bg border dark:border-white/10 light:border-black/10 focus:border-msr-accent outline-none transition-all"></textarea>
+                <button type="submit" class="md:col-span-2 w-full py-5 bg-msr-accent text-white font-bold rounded-xl shadow-xl hover:bg-msr-accent-dark transition-all">GENERATE TECHNICAL ENQUIRY</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="pt-24 pb-12 border-t dark:border-white/5 light:border-black/5 dark:bg-dark-bg light:bg-light-bg">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 grid md:grid-cols-3 gap-16 mb-20">
+            <div>
+                <div class="flex items-center gap-4 mb-8">
+                    <div class="w-10 h-10 bg-msr-accent rounded-lg flex items-center justify-center font-display font-black text-white">M</div>
+                    <span class="font-display font-bold tracking-tight uppercase">MSR Engineering</span>
+                </div>
+                <p class="opacity-60 text-sm leading-relaxed max-w-xs mb-6">Precision manufacturing partner for industrial leaders since 1991. ISO 9001:2015 Certified.</p>
+                <div class="flex gap-4">
+                    <a href="tel:+919538881631" class="w-10 h-10 rounded-full border dark:border-white/10 light:border-black/10 flex items-center justify-center hover:bg-msr-accent hover:border-msr-accent hover:text-white transition-all"><i data-lucide="phone" class="w-4 h-4"></i></a>
+                    <a href="mailto:info@msrengg.in" class="w-10 h-10 rounded-full border dark:border-white/10 light:border-black/10 flex items-center justify-center hover:bg-msr-accent hover:border-msr-accent hover:text-white transition-all"><i data-lucide="mail" class="w-4 h-4"></i></a>
+                    <a href="https://www.msrenggworks.com" target="_blank" class="w-10 h-10 rounded-full border dark:border-white/10 light:border-black/10 flex items-center justify-center hover:bg-msr-accent hover:border-msr-accent hover:text-white transition-all"><i data-lucide="globe" class="w-4 h-4"></i></a>
+                </div>
+            </div>
+            <div>
+                <h5 class="font-black text-[10px] uppercase tracking-[0.3em] text-msr-accent mb-8">Direct Access</h5>
+                <ul class="space-y-4 text-sm font-bold opacity-70">
+                    <li><a href="#services" class="hover:text-msr-accent transition-colors">Our Services</a></li>
+                    <li><a href="#about" class="hover:text-msr-accent transition-colors">Company Journey</a></li>
+                    <li><a href="#matrix" class="hover:text-msr-accent transition-colors">Factory & Machinery</a></li>
+                    <li><a href="#customers" class="hover:text-msr-accent transition-colors">Industries Served</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="font-black text-[10px] uppercase tracking-[0.3em] text-msr-accent mb-8">HQ & Factory</h5>
+                <p class="opacity-70 text-sm leading-relaxed mb-6">Plot No. 235/O, 3rd Phase, Bommasandra Industrial Area, Bengaluru, Karnataka - 560099</p>
+                <a href="mailto:mahesh@msrengg.in" class="text-msr-accent font-bold hover:underline block mb-1">mahesh@msrengg.in</a>
+                <a href="mailto:info@msrengg.in" class="text-msr-accent font-bold hover:underline block mb-4">info@msrengg.in</a>
+                <a href="tel:+919538881631" class="font-bold opacity-80 hover:text-msr-accent">+91 95388 81631</a>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 pt-8 border-t dark:border-white/5 light:border-black/5 flex flex-col md:flex-row justify-between items-center gap-6">
+            <p class="text-[9px] font-black uppercase tracking-widest opacity-50">© <span id="year"></span> MSR Engineering Works. All Rights Reserved.</p>
+            <div class="flex gap-8 opacity-50 text-[9px] font-black uppercase tracking-widest">
+                <a href="#" class="hover:text-msr-accent">Privacy Policy</a>
+                <a href="#" class="hover:text-msr-accent">Quality Policy</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Init Lucide Icons
+        lucide.createIcons();
+
+        // Theme Toggle Logic
+        const html = document.documentElement;
+        function toggleTheme() {
+            html.classList.toggle('dark');
+            html.classList.toggle('light');
+            localStorage.setItem('msr-theme', html.classList.contains('dark') ? 'dark' : 'light');
+        }
+
+        // Apply saved theme
+        const savedTheme = localStorage.getItem('msr-theme') || 'light';
+        html.className = `scroll-smooth ${savedTheme}`;
+
+        // Date update
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.utils.toArray('.reveal-up').forEach((elem) => {
+            gsap.to(elem, {
+                scrollTrigger: { trigger: elem, start: "top 85%", toggleActions: "play none none none" },
+                opacity: 1, y: 0, duration: 1.2, ease: "power4.out"
+            });
+        });
+
+        // Form Logic
+        const form = document.getElementById('rfqForm');
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const subject = `Enquiry: ${document.getElementById('service').value} - ${document.getElementById('company').value}`;
+                const body = `Name: ${document.getElementById('name').value}\nPhone: ${document.getElementById('phone').value}\nRequirement Type: ${document.getElementById('service').value}\n\nProject Details:\n${document.getElementById('message').value}`;
+                window.location.href = `mailto:mahesh@msrengg.in,info@msrengg.in?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            });
+        }
+
+        // Fixed Mobile Menu Logic
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mainNav = document.getElementById('main-nav');
+
+        if (mobileBtn && mainNav) {
+            mobileBtn.addEventListener('click', () => {
+                mainNav.classList.toggle('hidden');
+                mainNav.classList.toggle('flex');
+                mainNav.classList.toggle('flex-col');
+                mainNav.classList.toggle('absolute');
+                mainNav.classList.toggle('top-20');
+                mainNav.classList.toggle('left-0');
+                mainNav.classList.toggle('w-full');
+                mainNav.classList.toggle('p-6');
+                mainNav.classList.toggle('shadow-2xl');
+
+                // Add background matching the theme
+                if (html.classList.contains('dark')) {
+                    mainNav.classList.toggle('bg-dark-panel');
+                    mainNav.classList.toggle('border-b');
+                    mainNav.classList.toggle('border-white/10');
+                } else {
+                    mainNav.classList.toggle('bg-light-panel');
+                    mainNav.classList.toggle('border-b');
+                    mainNav.classList.toggle('border-black/10');
+                }
+            });
+
+            // Close mobile menu when clicking a link
+            const navLinks = mainNav.querySelectorAll('a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth < 768) { // Only auto-close on mobile sizes
+                        mainNav.classList.add('hidden');
+                        mainNav.classList.remove('flex', 'flex-col', 'absolute', 'top-20', 'left-0', 'w-full', 'p-6', 'shadow-2xl', 'bg-dark-panel', 'bg-light-panel', 'border-b', 'border-white/10', 'border-black/10');
+                    }
+                });
+            });
+        }
+    </script>
+</body>
+</html>
