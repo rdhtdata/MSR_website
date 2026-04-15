@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="MSR Engineering Works - ISO 9001:2015 certified precision press tools, sheet metal fabrication, SPM, agro-machinery & EV chassis components manufacturer in Bangalore. Established 1991 with 22,000 sqft facility.">
+  <meta name="keywords" content="press tools Bangalore, sheet metal fabrication, precision components, SPM manufacturer, agro-machinery, EV chassis, MSR Engineering Works, Bommasandra industrial area, ISO 9001 certified">
+  <meta name="author" content="MSR Engineering Works">
+  <title>MSR Engineering Works | Precision Press Tools & Sheet Metal Fabrication since 1991</title>
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Fonts: Inter & Outfit for modern 2026 industrial feel -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #ffffff;
+      color: #111827;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    :root {
+      --primary-deep: #0a2a3e;
+      --primary-steel: #1e4a6e;
+      --accent-iron: #d9480f;
+      --accent-iron-light: #f05a28;
+      --gray-light: #f3f4f6;
+      --gray-border: #e5e7eb;
+      --text-dark: #1f2937;
+      --text-muted: #4b5563;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.03);
+      --shadow-md: 0 10px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.02);
+      --shadow-lg: 0 20px 25px -12px rgba(0,0,0,0.08);
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    /* modern header with glassmorphism touch */
+    .navbar {
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(8px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--gray-border);
+      padding: 16px 0;
+    }
+
+    .nav-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .logo h2 {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 1.6rem;
+      color: var(--primary-deep);
+      letter-spacing: -0.3px;
+    }
+    .logo span {
+      color: var(--accent-iron);
+      font-weight: 800;
+    }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 500;
+      color: var(--text-dark);
+      transition: 0.2s;
+      font-size: 0.95rem;
+    }
+    .nav-links a:hover { color: var(--accent-iron); }
+    .hero {
+      background: linear-gradient(110deg, #f9fafb 0%, #ffffff 100%);
+      padding: 60px 0 70px;
+      border-bottom: 1px solid var(--gray-border);
+    }
+    .hero-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 48px;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .hero-left { flex: 1.2; }
+    .hero-left h1 {
+      font-size: 3.2rem;
+      font-weight: 800;
+      font-family: 'Outfit', sans-serif;
+      color: var(--primary-deep);
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    .badge-year {
+      display: inline-block;
+      background: var(--accent-iron-light);
+      color: white;
+      padding: 4px 14px;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    .hero-stats {
+      display: flex;
+      gap: 32px;
+      margin: 28px 0;
+      flex-wrap: wrap;
+    }
+    .stat {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .stat i { font-size: 1.6rem; color: var(--accent-iron); }
+    .hero-right {
+      flex: 0.9;
+      background: var(--primary-deep);
+      border-radius: 32px;
+      padding: 28px;
+      color: white;
+      box-shadow: var(--shadow-lg);
+    }
+    .rating {
+      font-size: 2.2rem;
+      font-weight: 800;
+    }
+    .cta-btn {
+      background: var(--accent-iron);
+      color: white;
+      border: none;
+      padding: 14px 36px;
+      border-radius: 48px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .cta-btn:hover { background: #b十三a; transform: translateY(-2px); }
+    section { padding: 72px 0; border-bottom: 1px solid var(--gray-border); }
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      font-family: 'Outfit', sans-serif;
+      color: var(--primary-deep);
+      margin-bottom: 16px;
+    }
+    .section-sub {
+      color: var(--text-muted);
+      max-width: 720px;
+      margin-bottom: 48px;
+    }
+    .grid-2col {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+    }
+    .card {
+      background: white;
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--gray-border);
+      transition: all 0.25s;
+    }
+    .card:hover { box-shadow: var(--shadow-md); transform: translateY(-4px); }
+    .icon-lg { font-size: 2.4rem; color: var(--accent-iron); margin-bottom: 20px; }
+    .service-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px,1fr));
+      gap: 24px;
+    }
+    .machinery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px,1fr));
+      gap: 20px;
+    }
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .timeline-item {
+      display: flex;
+      gap: 16px;
+      align-items: baseline;
+      border-left: 3px solid var(--accent-iron);
+      padding-left: 20px;
+    }
+    .client-show {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 20px;
+    }
+    .client-tag {
+      background: var(--gray-light);
+      padding: 8px 20px;
+      border-radius: 40px;
+      font-weight: 500;
+    }
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+    .form-group { margin-bottom: 20px; }
+    input, select, textarea {
+      width: 100%;
+      padding: 14px 18px;
+      border: 1px solid var(--gray-border);
+      border-radius: 24px;
+      font-family: 'Inter', sans-serif;
+      transition: 0.2s;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent-iron);
+      box-shadow: 0 0 0 3px rgba(217,72,15,0.15);
+    }
+    footer {
+      background: #0a2a3e;
+      color: #cbd5e1;
+      padding: 48px 0 32px;
+    }
+    @media (max-width: 900px) {
+      .hero-left h1 { font-size: 2.3rem; }
+      .contact-wrap { grid-template-columns: 1fr; }
+      .nav-flex { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container nav-flex">
+    <div class="logo"><h2>MSR <span>Engineering Works</span></h2></div>
+    <div class="nav-links">
+      <a href="#home">Home</a><a href="#about">About</a><a href="#services">Capabilities</a><a href="#machinery">Infra</a><a href="#clients">Clients</a><a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section id="home" class="hero">
+  <div class="container hero-grid">
+    <div class="hero-left">
+      <div class="badge-year"><i class="fas fa-calendar-alt"></i> Established 1991 | ISO 9001:2015</div>
+      <h1>Precision Press Tools & Sheet Metal Fabrication</h1>
+      <p style="font-size: 1.1rem; color: #374151;">Leading manufacturer of press components, SPM, agro-machinery & EV chassis. 3+ decades of engineering excellence.</p>
+      <div class="hero-stats">
+        <div class="stat"><i class="fas fa-building"></i> <span>22,000 sq.ft</span></div>
+        <div class="stat"><i class="fas fa-microchip"></i> <span>25+ Machines</span></div>
+        <div class="stat"><i class="fas fa-users"></i> <span>26+ Experts</span></div>
+      </div>
+      <a href="#contact" class="cta-btn"><i class="fas fa-file-signature"></i> Request Quote</a>
+    </div>
+    <div class="hero-right">
+      <i class="fas fa-star-of-life" style="color: #f05a28;"></i>
+      <div class="rating">4.3★</div>
+      <p>Trusted by industry leaders</p>
+      <hr style="margin: 16px 0; opacity:0.3;">
+      <p><i class="fas fa-map-marker-alt"></i> Bommasandra Industrial Area, Bengaluru</p>
+      <p><i class="fas fa-phone-alt"></i> +91 9538881631</p>
+    </div>
+  </div>
+</section>
+
+<!-- About Section with founder & team -->
+<section id="about">
+  <div class="container">
+    <h2 class="section-title">About MSR Engineering Works</h2>
+    <div class="grid-2col">
+      <div>
+        <p style="margin-bottom: 16px;">Founded in 1991 by <strong>Mr. T.M. Sundarrajan</strong>, MSR Engineering Works has evolved into a premier ISO 9001:2015 certified manufacturer of <strong>precision press tools, press components, sheet metal fabrications, SPM, and agro-machinery</strong>. Based in Bangalore’s Bommasandra Industrial Area, our state-of-the-art facility spans 22,000 sq.ft, equipped with advanced machinery to meet diverse manufacturing demands.</p>
+        <p>Today, led by <strong>Mr. Sai Mahesh M S</strong> (Mechanical Engineer, PESIT & MBA, Leeds Business School), we blend modern strategies with traditional values, driving innovation, employee welfare, and sustainable growth. Our team of 25+ professionals (avg. 12 years experience) ensures defect-free production with rigorous QA processes.</p>
+        <div style="margin-top: 24px;"><i class="fas fa-check-circle" style="color:var(--accent-iron);"></i> <strong>Vision 2030:</strong> Establish 2 more advanced manufacturing units, leading in precision sheet metal solutions.</div>
+      </div>
+      <div class="card" style="background: var(--gray-light);">
+        <i class="fas fa-chart-line icon-lg"></i>
+        <h3>Proven Growth & Reliability</h3>
+        <ul style="margin-top: 12px; list-style: none;">
+          <li>✓ Consistent turnover growth (5+ years)</li>
+          <li>✓ Workforce expansion: 14 → 26 members</li>
+          <li>✓ Machinery: 19 → 25 advanced units</li>
+          <li>✓ Facility expansion: 6,000 → 9,000 sq.ft (2024 ongoing)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="grid-2col" style="margin-top: 40px;">
+      <div><i class="fas fa-industry icon-lg"></i><h3>Our Core Expertise</h3><p>Precision press tools, press components (Mild Steel, Stainless Steel, Brass), sheet metal fabrication (laser cutting, shearing, bending), SPM, agro-machinery assemblies, EV buggy chassis, silo infrastructure & conveyor systems.</p></div>
+      <div><i class="fas fa-globe-asia icon-lg"></i><h3>Sustainability & Community</h3><p>Collaborated with NGO to design & deliver International Standard Cycle Parking Infrastructure at Church Street, inaugurated by former CM of Karnataka — promoting greener mobility.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Services / Scope of Work -->
+<section id="services" style="background-color: #fafafa;">
+  <div class="container">
+    <h2 class="section-title">Our Manufacturing Capabilities</h2>
+    <div class="service-list">
+      <div class="card"><i class="fas fa-drafting-compass icon-lg"></i><h3>Press Tools</h3><p>Custom-designed, high-volume production tools for precision & efficiency.</p></div>
+      <div class="card"><i class="fas fa-cogs icon-lg"></i><h3>Press Components</h3><p>Mild steel, stainless steel, brass components with exacting standards.</p></div>
+      <div class="card"><i class="fas fa-cube icon-lg"></i><h3>Sheet Metal Fabrication</h3><p>Laser cutting, shearing, bending, assembly & surface finishing.</p></div>
+      <div class="card"><i class="fas fa-tractor icon-lg"></i><h3>Agro-Machinery & SPM</h3><p>Agricultural equipment, special purpose machines & assemblies.</p></div>
+      <div class="card"><i class="fas fa-car-battery icon-lg"></i><h3>EV Chassis Components</h3><p>Chassis for EV buggies (various seating capacities) for industry leaders.</p></div>
+      <div class="card"><i class="fas fa-conveyor-belt icon-lg"></i><h3>Silo & Conveyor Systems</h3><p>Chutes, conveyor parts, silo infrastructure for bulk handling.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Machinery & Infrastructure Timeline -->
+<section id="machinery">
+  <div class="container">
+    <h2 class="section-title">Advanced Machinery & Infrastructure</h2>
+    <div class="grid-2col">
+      <div>
+        <h3>Key Equipment</h3>
+        <ul style="columns: 2; column-gap: 32px; margin-top: 16px;">
+          <li>⚙️ Power Presses (10-200 ton)</li><li>⚙️ Fly Press (1-10 ton)</li>
+          <li>⚙️ Bending Machine (3m/6mm)</li><li>⚙️ Shearing Machine (3m/6mm)</li>
+          <li>⚙️ Laser Cutting (3kW, 4x2m)</li><li>⚙️ CNC Bending (4.3m/200T)</li>
+          <li>⚙️ Surface Grinder & Milling DRO</li><li>⚙️ TIG/CO2/Spot Welding</li>
+          <li>⚙️ Radial Drill, Sheet Rolling</li><li>⚙️ Precision Instruments</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Growth Timeline</h3>
+        <div class="timeline">
+          <div class="timeline-item"><span style="font-weight:800;">1991</span> MSME setup, hydraulic press & lathe</div>
+          <div class="timeline-item"><span style="font-weight:800;">2000</span> High capacity press machines</div>
+          <div class="timeline-item"><span style="font-weight:800;">2004</span> Acquired 22,000 sq.ft facility</div>
+          <div class="timeline-item"><span style="font-weight:800;">2017</span> ISO 9001:2015 certified</div>
+          <div class="timeline-item"><span style="font-weight:800;">2024</span> Expanding to 9,000 sq.ft assembly area</div>
+        </div>
+      </div>
+    </div>
+    <div style="background: #eef2ff; border-radius: 28px; padding: 24px; margin-top: 32px;">
+      <i class="fas fa-microscope"></i> <strong>Quality Assurance:</strong> Digital Vernier Calipers, Micrometers, Plating Thickness Gauge, Thread Plug Gauges, Dial Gauge, Surface Plate — all ensuring defect-free output.
+    </div>
+  </div>
+</section>
+
+<!-- Clients Section from PDF -->
+<section id="clients" style="background: #f9fafb;">
+  <div class="container">
+    <h2 class="section-title">Trusted by Industry Leaders</h2>
+    <div class="client-show">
+      <span class="client-tag">TVS Motor Company</span><span class="client-tag">Fowler Westrup India</span><span class="client-tag">Mecwin Technologies</span>
+      <span class="client-tag">Orizin Technologies</span><span class="client-tag">Virya Mobility</span><span class="client-tag">Palis Eco Vehicles</span>
+      <span class="client-tag">Aditya Auto Products</span><span class="client-tag">Shobha Globs India</span><span class="client-tag">Nash Industries</span>
+      <span class="client-tag">Welfabs India</span><span class="client-tag">Supangita Engineers</span>
+    </div>
+    <p style="margin-top: 28px;"><i class="fas fa-award" style="color:var(--accent-iron);"></i> Supplying high-precision components to automotive, EV, agricultural, and industrial sectors across India.</p>
+  </div>
+</section>
+
+<!-- Contact + Map + Quote Form -->
+<section id="contact">
+  <div class="container">
+    <h2 class="section-title">Get in Touch</h2>
+    <div class="contact-wrap">
+      <div class="card">
+        <i class="fas fa-map-pin icon-lg"></i>
+        <h3>Visit Our Facility</h3>
+        <p><strong>MSR Engineering Works</strong><br>Plot No:235/O, 3rd Phase, Bommasandra Industrial Area, Bommasandra, Bengaluru, Karnataka 560099, India</p>
+        <p><i class="fas fa-phone"></i> +91 9538881631<br><i class="fas fa-envelope"></i> mahesh@msrengg.in | info@msrengg.in<br><i class="fas fa-globe"></i> www.msrenggworks.com</p>
+        <div style="margin: 20px 0; border-radius: 20px; overflow:hidden; height:200px;">
+          <iframe src="https://maps.google.com/maps?q=Plot%20No%3A235%2FO%2C%203rd%20Phase%20Bommasandra%20Industrial%20Area%2C%20Bengaluru&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+      </div>
+      <div class="card" id="quote-form">
+        <h3><i class="fas fa-paper-plane"></i> Request a Quote</h3>
+        <form id="contactForm">
+          <div class="form-group"><input type="text" id="fullname" placeholder="Full Name *" required></div>
+          <div class="form-group"><input type="tel" id="phoneNum" placeholder="Phone Number *" required></div>
+          <div class="form-group"><input type="email" id="emailId" placeholder="Email Address"></div>
+          <div class="form-group">
+            <select id="serviceInterest">
+              <option value="">-- Service / Interest --</option>
+              <option>Press Tools & Components</option><option>Sheet Metal Fabrication</option>
+              <option>SPM / Agro-Machinery</option><option>EV Chassis Manufacturing</option><option>Laser Cutting / Bending</option>
+            </select>
+          </div>
+          <div class="form-group"><textarea rows="3" id="message" placeholder="Describe your requirement (quantity, material, timeline)"></textarea></div>
+          <button type="submit" class="cta-btn" style="width:100%; justify-content:center;"><i class="fas fa-check-circle"></i> Submit Enquiry</button>
+          <div id="formFeedback" style="margin-top: 16px; font-size:0.85rem;"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px;">
+      <div><i class="fas fa-certificate"></i> ISO 9001:2015 Certified | Since 1991</div>
+      <div><i class="fas fa-map-marker-alt"></i> Bommasandra Industrial Area, Bengaluru</div>
+      <div><a href="#home" style="color:#cbd5e1; text-decoration:none;">Back to top</a></div>
+    </div>
+    <hr style="margin: 28px 0; border-color:#2d4a6e;">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px;">
+      <span>© 2025 MSR Engineering Works — Precision Press Tools & Sheet Metal Experts</span>
+      <span>Serving Bangalore & Pan-India industrial clients</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Form handling with smooth scroll & success message
+  const form = document.getElementById('contactForm');
+  const feedback = document.getElementById('formFeedback');
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name = document.getElementById('fullname')?.value.trim();
+    const phone = document.getElementById('phoneNum')?.value.trim();
+    if (!name || !phone) {
+      feedback.innerHTML = '<span style="color:#d9480f;"><i class="fas fa-exclamation-circle"></i> Please enter name and phone number.</span>';
+      return;
+    }
+    feedback.innerHTML = '<span style="color:#1e7e34;"><i class="fas fa-check-circle"></i> Thank you! Our team will contact you within 24 hours.</span>';
+    form.reset();
+    setTimeout(() => { feedback.innerHTML = ''; }, 5000);
+  });
+
+  // Smooth nav
+  document.querySelectorAll('.nav-links a, .cta-btn[href="#contact"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const hash = this.getAttribute('href');
+      if (hash && hash !== '#') {
+        e.preventDefault();
+        const target = document.querySelector(hash);
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+  document.querySelector('.cta-btn[href="#contact"]')?.addEventListener('click', function(e) {
+    e.preventDefault();
+    document.querySelector('#contact').scrollIntoView({ behavior: 'smooth' });
+  });
+</script>
+</body>
+</html>
